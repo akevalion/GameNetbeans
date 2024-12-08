@@ -1,5 +1,6 @@
 package game;
 
+import game.server.ServerImpl;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 

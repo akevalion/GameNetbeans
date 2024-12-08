@@ -2,6 +2,7 @@
  */
 package game;
 
+import game.server.Server;
 import java.rmi.Naming;
 import java.util.List;
 import java.util.Scanner;

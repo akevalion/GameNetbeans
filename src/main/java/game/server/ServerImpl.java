@@ -1,6 +1,6 @@
 /*
  */
-package game;
+package game.server;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
