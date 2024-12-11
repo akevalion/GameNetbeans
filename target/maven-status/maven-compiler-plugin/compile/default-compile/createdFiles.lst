@@ -1,5 +1,8 @@
-game\Server.class
-game\ServerImpl.class
+game\server\TableUtils.class
+game\server\User.class
+game\server\Play.class
 game\ClientMain.class
-game\User.class
+game\server\Server.class
 game\Main.class
+game\server\ServerImpl.class
+game\server\TableUser.class
