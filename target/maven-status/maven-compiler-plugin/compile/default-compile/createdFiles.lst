@@ -3,6 +3,7 @@ game\server\User.class
 game\server\Play.class
 game\ClientMain.class
 game\server\Server.class
+game\server\Game.class
 game\Main.class
 game\server\ServerImpl.class
 game\server\TableUser.class

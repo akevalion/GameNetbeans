@@ -7,6 +7,7 @@ package game.server;
  * @author milton
  */
 public class TableUser {
+    
     private Integer [] points;
     public TableUser(){
         points = new Integer[Play.values().length];
@@ -45,5 +46,12 @@ public class TableUser {
 
     public Integer get(Play play) {
         return points[play.getIndex()];
+    }
+    
+    public boolean isEmpty(){
+        for(Play x: Play.values())
+            if(this.get(x) != null)
+                return false;
+        return true;
     }
 }

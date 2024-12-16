@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: game.server.TableUserTest
+Test set: game.server.GameTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in game.server.TableUserTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in game.server.GameTest
