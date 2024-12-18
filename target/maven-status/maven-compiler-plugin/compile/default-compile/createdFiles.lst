@@ -1,2 +1,13 @@
+game/server/User.class
+game/Main.class
+game/server/calc/NumberCalculator.class
+game/server/Game.class
+game/server/Server.class
+game/server/calc/StairsCalculator.class
+game/server/TableUser.class
 game/server/calc/Calculator.class
-game/server/calc/CalculatorNum.class
+game/server/calc/FullCalculator.class
+game/server/Play.class
+game/server/TableUtils.class
+game/server/ServerImpl.class
+game/ClientMain.class

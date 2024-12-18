@@ -1,1 +1,6 @@
+game/server/calc/FullCalculatorTest.class
+game/server/TableUserTest.class
 game/server/calc/CalculatorNumTest.class
+game/UserTest.class
+game/server/calc/StairsCalculatorTest.class
+game/server/GameTest.class

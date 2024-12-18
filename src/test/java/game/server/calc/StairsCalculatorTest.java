@@ -73,18 +73,121 @@ public class StairsCalculatorTest {
         int result = instance.firstShoot(dice);
         assertEquals(expResult, result);
     }
-    /*
+    
     @Test
     public void testSecondShoot() {
-        System.out.println("secondShoot");
-        int[] dice = null;
-        int index = 0;
+        int[] dice = {1, 2, 3, 4, 5};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot1() {
+        int[] dice = {2, 3, 4, 5, 6};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot2() {
+        int[] dice = {6, 3, 4, 5, 1};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot3() {
+        int[] dice = {6, 3, 4, 3, 1};
         StairsCalculator instance = new StairsCalculator();
         int expResult = 0;
-        int result = instance.secondShoot(dice, index);
+        int result = instance.secondShoot(dice);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-    */
+    
+    @Test
+    public void testSecondShoot4() {
+        int[] dice = {1, 3, 4, 5, 5};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot5() {
+        int[] dice = {2, 4, 4, 5, 6};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot6() {
+        int[] dice = {6, 3, 4, 5, 6};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot7() {
+        int[] dice = {6, 3, 3, 5, 5};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot8() {
+        int[] dice = {1, 4, 4, 5, 5};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot9() {
+        int[] dice = {1, 4, 4, 2, 1};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 0;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot10() {
+        int[] dice = {1, 4, 4, 5, 1};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 20;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot11() {
+        int[] dice = {6, 4, 4, 2, 6};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 0;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSecondShoot12() {
+        int[] dice = {6, 3, 3, 2, 6};
+        StairsCalculator instance = new StairsCalculator();
+        int expResult = 0;
+        int result = instance.secondShoot(dice);
+        assertEquals(expResult, result);
+    }
 }

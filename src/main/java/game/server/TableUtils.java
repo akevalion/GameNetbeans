@@ -53,6 +53,5 @@ public class TableUtils {
         print(b, aTable, play);
         b.append(" │");
         b.append(System.lineSeparator());
-    }
-    
+    }    
 }
