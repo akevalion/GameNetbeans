@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
  *
  * @author pi
  */
-public class CalculatorNumTest {
+public class NumberCalculatorTest {
 
     @Test
     public void testFirstShoot() {

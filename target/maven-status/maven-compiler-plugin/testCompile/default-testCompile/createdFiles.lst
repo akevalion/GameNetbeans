@@ -1,6 +1,7 @@
-game/server/calc/FullCalculatorTest.class
-game/server/TableUserTest.class
-game/server/calc/CalculatorNumTest.class
-game/UserTest.class
-game/server/calc/StairsCalculatorTest.class
-game/server/GameTest.class
+game\server\calc\FullCalculatorTest.class
+game\UserTest.class
+game\server\calc\StairsCalculatorTest.class
+game\server\calc\NumberCalculatorTest.class
+game\server\calc\PokerCalculatorTest.class
+game\server\TableUserTest.class
+game\server\GameTest.class

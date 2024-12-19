@@ -19,6 +19,7 @@ public class StairsCalculator implements Calculator{
         return 0;
     }
 
+    @Override
     public int secondShoot(int[] dice){
         int[] n = Calculator.map(dice);
         if(n[3]+n[4]>2)
