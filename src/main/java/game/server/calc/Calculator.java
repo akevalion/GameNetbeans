@@ -50,6 +50,13 @@ public interface Calculator {
         }
         return transformed;
     }
+
+    public static int sum(int[] dice){
+        int sum = 0;
+        for(int k : dice)
+            sum += k;
+        return sum;
+    }
     
     int firstShoot(int[] dice);
     int secondShoot(int[] dice);

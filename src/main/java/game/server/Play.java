@@ -2,6 +2,8 @@
  */
 package game.server;
 
+import game.server.calc.WowCalculator;
+import game.server.calc.BigCalculator;
 import game.server.calc.Calculator;
 import game.server.calc.FullCalculator;
 import game.server.calc.NumberCalculator;
@@ -22,9 +24,9 @@ public enum Play {
     ESCALERA(6, new StairsCalculator()),
     FULL(7, new FullCalculator()),
     POKER(8, new PokerCalculator()),
-    GRANDE1(9/*, new BigCalculator()*/),
-    GRANDE2(10/*, new BigCalculator()*/),
-    DORMIDA(11/*, new WowCalculator()*/);
+    GRANDE1(9, new BigCalculator()),
+    GRANDE2(10, new BigCalculator()),
+    DORMIDA(11, new WowCalculator());
     private int index;
     private Calculator calc;
     Play(int index){

@@ -1,8 +1,10 @@
 game\server\calc\Calculator.class
 game\ClientMain.class
 game\server\Server.class
+game\server\calc\BigCalculator.class
 game\server\Game.class
 game\server\TableUser.class
+game\server\calc\WowCalculator.class
 game\server\TableUtils.class
 game\server\calc\PokerCalculator.class
 game\server\calc\StairsCalculator.class

@@ -11,12 +11,16 @@ public class PokerCalculator implements Calculator{
     @Override
     public int firstShoot(int[] dice) {
         int[] groups = Calculator.groups(dice);
-        return groups.length == 2 && (groups[0] == 1 || groups[0] == 4) ? 45 : 0;
+        return check(groups)?45:0;
+    }
+    private boolean check(int[] groups){
+        return groups.length == 2 && (groups[0] == 1 || groups[0] == 4);
     }
 
     @Override
     public int secondShoot(int[] dice) {
-        int result = firstShoot(Calculator.transform(dice));
-        return result == 0? 0: 40;
+        int[] transformedDice = Calculator.transform(dice);
+        int[] groups = Calculator.groups(transformedDice);
+        return (groups.length == 1 || this.check(groups))?40:0;
     }
 }

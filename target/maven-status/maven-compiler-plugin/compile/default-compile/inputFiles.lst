@@ -3,6 +3,7 @@ C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\User.j
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\ClientMain.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\Game.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\NumberCalculator.java
+C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\WowCalculator.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\Main.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\Calculator.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\TableUtils.java
@@ -10,5 +11,6 @@ C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\Server
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\PokerCalculator.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\ServerImpl.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\TableUser.java
+C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\BigCalculator.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\FullCalculator.java
 C:\Users\milton\Documents\NetBeansProjects\game\src\main\java\game\server\calc\StairsCalculator.java
