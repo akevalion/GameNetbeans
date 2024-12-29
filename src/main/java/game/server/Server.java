@@ -11,5 +11,5 @@ import java.util.List;
  * @author milton
  */
 public interface Server extends Remote{
-    List<String> getUserNames() throws RemoteException;
+    String getName() throws RemoteException;
 }

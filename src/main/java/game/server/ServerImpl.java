@@ -22,13 +22,17 @@ public class ServerImpl extends UnicastRemoteObject implements Server{
         entityManager = emf.createEntityManager();
     }
 
-    @Override
     public List<String> getUserNames() throws RemoteException {
         List<User> users = entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
         List<String> names = new ArrayList();
         for(User x: users)
             names.add(x.getName());
         return names;
+    }
+
+    @Override
+    public String getName() throws RemoteException {
+        return "Cacho";
     }
     
 }

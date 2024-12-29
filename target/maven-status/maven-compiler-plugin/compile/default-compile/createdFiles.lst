@@ -8,9 +8,9 @@ game\server\calc\WowCalculator.class
 game\server\TableUtils.class
 game\server\calc\PokerCalculator.class
 game\server\calc\StairsCalculator.class
+game\ServerMain.class
 game\server\User.class
 game\server\Play.class
 game\server\calc\NumberCalculator.class
-game\Main.class
 game\server\calc\FullCalculator.class
 game\server\ServerImpl.class

@@ -37,7 +37,7 @@ public class ClientMain {
         }
     }
     private static void showUsers(Server service) throws Exception{
-        List<String> names = service.getUserNames();
+        List<String> names = null; //service.getUserNames();
         System.out.println("Usuarios dentro del servidor");
         for(String x: names)
             System.out.println(x);

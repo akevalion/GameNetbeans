@@ -1,6 +1,7 @@
 game\server\calc\FullCalculatorTest.class
 game\UserTest.class
 game\server\calc\WowCalculatorTest.class
+game\server\ServerTest.class
 game\server\calc\StairsCalculatorTest.class
 game\server\calc\BigCalculatorTest.class
 game\server\calc\NumberCalculatorTest.class
