@@ -2,17 +2,19 @@
  */
 package game;
 
-import game.server.Server;
-import java.rmi.Naming;
-import java.util.List;
-import java.util.Scanner;
+import game.client.ClientWindow;
+import javax.swing.UIManager;
 
 /**
  *
  * @author milton
  */
 public class ClientMain {
-    public static void main(String args[]){
+    public static void main(String[] args) throws Exception {
+        UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        new ClientWindow().open();
+    }
+    /*public static void main(String args[]){
         try {
             Server service = (Server) Naming.lookup("rmi://localhost/Server");
             Scanner scan = new Scanner(System.in);
@@ -41,5 +43,5 @@ public class ClientMain {
         System.out.println("Usuarios dentro del servidor");
         for(String x: names)
             System.out.println(x);
-    }
+    }*/
 }
