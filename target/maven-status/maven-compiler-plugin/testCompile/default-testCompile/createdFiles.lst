@@ -1,10 +1,13 @@
-game\server\calc\FullCalculatorTest.class
+game\client\LoginPageTest.class
 game\UserTest.class
+game\server\calc\StairsCalculatorTest.class
+game\server\TableUserTest.class
+game\client\ClientWindowTest.class
+game\server\calc\FullCalculatorTest.class
 game\server\calc\WowCalculatorTest.class
 game\server\ServerTest.class
-game\server\calc\StairsCalculatorTest.class
 game\server\calc\BigCalculatorTest.class
 game\server\calc\NumberCalculatorTest.class
 game\server\calc\PokerCalculatorTest.class
-game\server\TableUserTest.class
+game\client\ClientTest.class
 game\server\GameTest.class
