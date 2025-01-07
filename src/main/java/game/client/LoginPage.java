@@ -75,7 +75,7 @@ public class LoginPage extends Page implements ActionListener {
                 BorderFactory.createLineBorder(Color.GRAY, 2), // Borde visible
                 BorderFactory.createEmptyBorder(10, 10, 10, 10) // Padding interno
         ));
-        inputPanel.setPreferredSize(new Dimension(380, 70)); // Tamaño fijo
+        inputPanel.setPreferredSize(new Dimension(450, 70)); // Tamaño fijo
 
         JLabel nameLabel = new JLabel("Ingresa tu nombre:");
         
