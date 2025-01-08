@@ -11,9 +11,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,15 +30,15 @@ public class LoginPage extends Page implements ActionListener {
 
     private JTextField nameField;
     private JButton enterButton;
-    
-    public LoginPage(){
+
+    public LoginPage() {
         nameField = new JTextField(15);
         nameField.addActionListener(this);
-        
+
         enterButton = new JButton(ENTER_BUTTON_TEXT);
         enterButton.addActionListener(this);
     }
-    
+
     @Override
     public boolean isLoginPage() {
         return true;
@@ -55,7 +52,7 @@ public class LoginPage extends Page implements ActionListener {
 
         // Fondo GIF
         JLabel backgroundLabel = new JLabel();
-        
+
         // Ajustar la imagen al tamaño de la ventana
         ImageIcon backgroundImage = new ImageIcon("img/animated.gif");
         backgroundLabel.setIcon(new ImageIcon(backgroundImage.getImage().getScaledInstance(window.getWidth(), window.getHeight(), Image.SCALE_DEFAULT)));
@@ -75,10 +72,10 @@ public class LoginPage extends Page implements ActionListener {
                 BorderFactory.createLineBorder(Color.GRAY, 2), // Borde visible
                 BorderFactory.createEmptyBorder(10, 10, 10, 10) // Padding interno
         ));
-        inputPanel.setPreferredSize(new Dimension(450, 70)); // Tamaño fijo
+        // Tamaño fijo
 
         JLabel nameLabel = new JLabel("Ingresa tu nombre:");
-        
+        inputPanel.setPreferredSize(new Dimension(nameLabel.getPreferredSize().width+ 50 + enterButton.getPreferredSize().width+ nameField.getPreferredSize().width, 70));
 
         inputPanel.add(nameLabel);
         inputPanel.add(nameField);
@@ -104,24 +101,25 @@ public class LoginPage extends Page implements ActionListener {
         // Agregar el fondo al JFrame
         window.setContentPane(backgroundLabel); // Establecer el fondo como contenido principal
     }
-    
-    public JButton getEnterButton(){
+
+    public JButton getEnterButton() {
         return enterButton;
     }
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        try{
+        try {
             this.loginToServer();
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(window, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void loginToServer(){
+
+    public void loginToServer() {
         String name = nameField.getText();
-        if(name.trim().isEmpty())
+        if (name.trim().isEmpty()) {
             throw new RuntimeException(INVALID_NAME_ERROR);
+        }
         try {
             window.setClient(new ClientImpl(name));
             window.doLogin();
@@ -133,7 +131,7 @@ public class LoginPage extends Page implements ActionListener {
     public String getName() {
         return nameField.getText();
     }
-    
+
     public void setName(String name) {
         nameField.setText(name);
     }

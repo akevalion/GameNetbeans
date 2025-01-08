@@ -76,4 +76,18 @@ public class LoginPageTest {
             assertEquals(expected, e.getMessage());
         }
     }
+    
+    @Test
+    public void testLoginWhenServerIsDown() {
+        login.setName(Client.CLIENT_NAME1);
+        window.setServer(null);
+        try{
+            login.loginToServer();
+            fail("should fail");
+        }catch(Exception e){
+            String expected = Server.NOT_FOUND;
+            assertEquals(expected, e.getMessage());
+        }
+    }
+    
 }

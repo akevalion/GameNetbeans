@@ -5,6 +5,7 @@ package game.client;
 import game.server.Server;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.rmi.Naming;
 import javax.swing.JFrame;
 
 /**
@@ -25,8 +26,8 @@ public class ClientWindow extends JFrame {
         this.setSize();
         this.setPage(new LoginPage());
     }
-    
-    private void setSize(){
+
+    private void setSize() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int screenWidth = screenSize.width;
         int screenHeight = screenSize.height;
@@ -63,22 +64,33 @@ public class ClientWindow extends JFrame {
     public void setServer(Server server) {
         this.server = server;
     }
-    
-    public Server getServer(){
+
+    public Server getServer() {
         return server;
     }
 
     public void setClient(Client client) {
-        this.client = (ClientImpl)client;
+        this.client = (ClientImpl) client;
     }
 
-    public void doLogin() throws Exception{
-        if(server == null)
-            throw new Exception("not implemented yet");
-        if(client == null)
+    public Server connectToServer() {
+        try {
+            Server service = (Server) Naming.lookup("rmi://localhost/Server");
+            return service;
+        } catch (Exception ex) {
+            throw new RuntimeException(Server.NOT_FOUND);
+        }
+    }
+
+    public void doLogin() throws Exception {
+        if (server == null) {
+            server = this.connectToServer();
+        }
+        if (client == null) {
             throw new Exception("should not happen");
+        }
         LobbyPage lobby = new LobbyPage();
-        client.usersDo((users)->{
+        client.usersDo((users) -> {
             lobby.updateUsers(users);
         });
         server.add(client);

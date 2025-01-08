@@ -14,6 +14,7 @@ import java.util.List;
 public interface Server extends Remote {
 
     public static final String DUPLICATED_NAME_ERROR = "Ese nombre ya fue usado por favor elija otro";
+    public static String NOT_FOUND = "No se puede conectar con el servidor";
 
     String getName() throws RemoteException;
 
