@@ -75,7 +75,7 @@ public class LoginPage extends Page implements ActionListener {
         // Tamaño fijo
 
         JLabel nameLabel = new JLabel("Ingresa tu nombre:");
-        inputPanel.setPreferredSize(new Dimension(nameLabel.getPreferredSize().width+ 50 + enterButton.getPreferredSize().width+ nameField.getPreferredSize().width, 70));
+        inputPanel.setPreferredSize(new Dimension(nameLabel.getPreferredSize().width+ 60 + enterButton.getPreferredSize().width+ nameField.getPreferredSize().width, 70));
 
         inputPanel.add(nameLabel);
         inputPanel.add(nameField);
