@@ -13,15 +13,11 @@ public class User {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(nullable = false)
-    private String password;
-
-    public User() {
+    public User(){
     }
-
-    public User(String name, String password) {
+    
+    public User(String name) {
         this.name = name;
-        this.password = password;
     }
 
     // Getters and Setters
@@ -41,20 +37,11 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
         return "User{"
                 + "id=" + id
                 + ", name='" + name + '\''
-                + ", password='" + password + '\''
                 + '}';
     }
 }

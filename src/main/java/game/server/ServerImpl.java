@@ -15,12 +15,24 @@ import javax.persistence.Persistence;
  *
  * @author milton
  */
-public class ServerImpl extends UnicastRemoteObject implements Server{
-    private EntityManager entityManager;
+public class ServerImpl extends UnicastRemoteObject implements Server {
+
+    protected EntityManager entityManager;
+    private final UserRepository userRepository;
     private List<Client> clients;
+
     public ServerImpl() throws RemoteException {
         super();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("GamePU");
+        this.setUpDB();
+        userRepository = new UserRepository(entityManager);
+    }
+
+    public void setUpDB() {
+        this.createEntityManager("GampePU");
+    }
+
+    protected void createEntityManager(String name) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(name);
         entityManager = emf.createEntityManager();
         clients = new ArrayList();
     }
@@ -28,8 +40,9 @@ public class ServerImpl extends UnicastRemoteObject implements Server{
     public List<String> getUserNames() throws RemoteException {
         List<User> users = entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
         List<String> names = new ArrayList();
-        for(User x: users)
+        for (User x : users) {
             names.add(x.getName());
+        }
         return names;
     }
 
@@ -45,26 +58,41 @@ public class ServerImpl extends UnicastRemoteObject implements Server{
 
     @Override
     public synchronized void add(Client client) throws RemoteException {
-        if(this.hasClient(client))
+        if (this.hasClient(client)) {
             throw new RemoteException(DUPLICATED_NAME_ERROR);
+        }
+
+        if (!userRepository.userExists(client.getName())) {
+            userRepository.addUser(new User(client.getName()));
+        }
+
         clients.add(client);
-        for(Client x : clients)
+        for (Client x : clients) {
             x.updateClients(clients);
+        }
     }
 
     @Override
     public synchronized void remove(Client client) throws RemoteException {
         clients.remove(client);
-        for(Client x : clients)
+        for (Client x : clients) {
             x.updateClients(clients);
+        }
     }
 
-    private boolean hasClient(Client client) throws RemoteException{
+    private boolean hasClient(Client client) throws RemoteException {
         String name = client.getName();
-        for(Client x: clients)
-            if(x.getName().equals(name))
+        for (Client x : clients) {
+            if (x.getName().equals(name)) {
                 return true;
+            }
+        }
         return false;
     }
-    
+
+    @Override
+    public int numberOfUserInDB() throws RemoteException {
+        return userRepository.size();
+    }
+
 }

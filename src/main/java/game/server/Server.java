@@ -23,4 +23,6 @@ public interface Server extends Remote {
     void add(Client client) throws RemoteException;
 
     void remove(Client client) throws RemoteException;
+
+    int numberOfUserInDB() throws RemoteException;
 }

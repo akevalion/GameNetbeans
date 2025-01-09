@@ -15,10 +15,9 @@ public class UserTest {
      */
     @Test
     public void testGetName() {
-        System.out.println("getName");
-        User instance = new User();
+        User user = new User("foo");
         String expResult = null;
-        String result = instance.getName();
+        String result = user.getName();
         assertEquals(expResult, result);
     }
 }
