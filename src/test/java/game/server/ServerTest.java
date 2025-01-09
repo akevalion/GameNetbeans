@@ -7,6 +7,7 @@ import game.client.ClientImpl;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static game.client.Client.*;
+import org.junit.After;
 import org.junit.Before;
 
 /**
@@ -19,10 +20,9 @@ public class ServerTest {
 
     @Before
     public void setUp() throws Exception {
-        if (server != null) {
-            ((Server4Test)server).closeEntityManager();
-        }
-        server = new Server4Test();
+        Server4Test server2Test = new Server4Test();
+        server2Test.clearDatabase();
+        server = server2Test;
     }
 
     @Test
