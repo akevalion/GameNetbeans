@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.rmi.Naming;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -95,5 +96,9 @@ public class ClientWindow extends JFrame {
         });
         server.add(client);
         this.setPage(lobby);
+    }
+
+    public void clean() {
+        this.getRootPane().removeAll();
     }
 }

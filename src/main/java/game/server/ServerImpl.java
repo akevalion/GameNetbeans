@@ -28,7 +28,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     }
 
     public void setUpDB() {
-        this.createEntityManager("GampePU");
+        this.createEntityManager("GamePU");
     }
 
     protected void createEntityManager(String name) {

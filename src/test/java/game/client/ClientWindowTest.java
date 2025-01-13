@@ -51,4 +51,12 @@ public class ClientWindowTest {
         assertTrue(window.getRootPane().getComponentCount() > 0);
         assertFalse(window.isResizable());
     }
+    
+    @Test
+    public void testCleanWindow(){
+        window.clean();
+        int expected = 0;
+        int result = window.getRootPane().getComponentCount();
+        assertEquals(expected, result);
+    }
 }
