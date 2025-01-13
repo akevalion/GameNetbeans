@@ -45,7 +45,7 @@ public class LoginPage extends Page implements ActionListener {
     }
 
     @Override
-    public void install() {
+    public void install() throws Exception {
         window.setResizable(false);
         // Configurar el layout principal
         window.setLayout(new GridBagLayout());

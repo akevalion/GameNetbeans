@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.rmi.Naming;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -53,9 +54,14 @@ public class ClientWindow extends JFrame {
     }
 
     public void setPage(Page newPage) {
-        currentPage = newPage;
-        currentPage.setWindow(this);
-        newPage.install();
+        try {
+            newPage.setWindow(this);
+            this.clean();
+            newPage.install();
+            currentPage = newPage;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public Page getCurrentPage() {
@@ -70,8 +76,12 @@ public class ClientWindow extends JFrame {
         return server;
     }
 
-    public void setClient(Client client) {
-        this.client = (ClientImpl) client;
+    public ClientImpl getClientImpl() {
+        return client;
+    }
+
+    public void setClient(ClientImpl client) {
+        this.client = client;
     }
 
     public Server connectToServer() {
@@ -99,6 +109,18 @@ public class ClientWindow extends JFrame {
     }
 
     public void clean() {
-        this.getRootPane().removeAll();
+        this.setContentPane(new JPanel());
+        this.revalidate();
+        this.repaint();
+        this.setResizable(true);
+    }
+
+    public void doLogout() {
+        try {
+            server.remove(client);
+            this.setPage(new LoginPage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

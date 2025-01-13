@@ -15,8 +15,8 @@ public class UserTest {
      */
     @Test
     public void testGetName() {
-        User user = new User("foo");
-        String expResult = null;
+        String expResult = "foo";
+        User user = new User(expResult);
         String result = user.getName();
         assertEquals(expResult, result);
     }

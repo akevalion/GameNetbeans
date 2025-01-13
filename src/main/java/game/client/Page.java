@@ -14,7 +14,11 @@ public abstract class Page {
         return false;
     }
 
-    public abstract void install();
+    public boolean isLobbyPage() {
+        return false;
+    }
+
+    public abstract void install() throws Exception;
 
     public ClientWindow getWindow() {
         return window;
