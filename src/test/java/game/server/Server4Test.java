@@ -3,7 +3,12 @@
 package game.server;
 
 import java.rmi.RemoteException;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 
 /**
  *
@@ -20,13 +25,40 @@ public class Server4Test extends ServerImpl {
         this.createEntityManager("GameTestPU");
     }
 
-    public void closeEntityManager() {
-        if (entityManager.isOpen()) {
-            entityManager.close();
+    /*public void clearDatabase() {
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+            entityManager.createQuery("DELETE FROM User u").executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
         }
-        EntityManagerFactory emf = entityManager.getEntityManagerFactory();
-        if (emf.isOpen()) {
-            emf.close();
+    }*/
+    public void clearDatabase() {
+    EntityTransaction transaction = entityManager.getTransaction();
+    try {
+        transaction.begin();
+        for (Class<?> entityClass : getAllEntityClasses()) {
+            entityManager.createQuery("DELETE FROM " + entityClass.getSimpleName()).executeUpdate();
         }
+        transaction.commit();
+    } catch (Exception e) {
+        if (transaction.isActive()) {
+            transaction.rollback();
+        }
+        throw e;
+    }
+}
+    
+    
+    private List<Class<?>> getAllEntityClasses() {
+        Metamodel metamodel = entityManager.getEntityManagerFactory().getMetamodel();
+        return metamodel.getEntities().stream()
+                .map(EntityType::getJavaType)
+                .collect(Collectors.toList());
     }
 }
