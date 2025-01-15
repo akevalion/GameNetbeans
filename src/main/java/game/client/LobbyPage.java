@@ -53,7 +53,7 @@ public class LobbyPage extends Page {
     }
 
     public int getNumberOfUsers() {
-        return 0;
+        return connectedUsersPanel.getNumberOfUsers();
     }
 
 }
