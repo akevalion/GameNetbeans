@@ -2,6 +2,7 @@
  */
 package game.client;
 
+import game.server.Server;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -76,7 +77,7 @@ public class LoginPage extends Page implements ActionListener {
 
         JLabel nameLabel = new JLabel("Ingresa tu nombre:");
         inputPanel.setPreferredSize(new Dimension(nameLabel.getPreferredSize().width+ 60 + enterButton.getPreferredSize().width+ nameField.getPreferredSize().width, 70));
-
+        
         inputPanel.add(nameLabel);
         inputPanel.add(nameField);
         inputPanel.add(enterButton);
@@ -100,6 +101,8 @@ public class LoginPage extends Page implements ActionListener {
 
         // Agregar el fondo al JFrame
         window.setContentPane(backgroundLabel); // Establecer el fondo como contenido principal
+        
+        nameField.grabFocus();
     }
 
     public JButton getEnterButton() {
@@ -122,10 +125,28 @@ public class LoginPage extends Page implements ActionListener {
         }
         try {
             window.setClient(new ClientImpl(name));
-            window.doLogin();
+            this.doLogin();
         } catch (Exception ex) {
             throw new RuntimeException(ex.getMessage());
         }
+    }
+    
+    private void doLogin() throws Exception {
+        Server server = window.getServer();
+        ClientImpl client = window.getClientImpl();
+        if (server == null) {
+            server = window.connectToServer();
+        }
+        if (client == null) {
+            throw new Exception("should not happen");
+        }
+        LobbyPage lobby = new LobbyPage();
+        client.usersDo((users) -> {
+            lobby.updateUsers(users);
+        });
+        server.add(client);
+        window.setServer(server);
+        window.setPage(lobby);
     }
 
     public String getName() {

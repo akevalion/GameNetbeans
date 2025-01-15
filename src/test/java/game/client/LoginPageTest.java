@@ -41,16 +41,15 @@ public class LoginPageTest {
 
     @Test
     public void testLoginToServer() {
-        login.setName(Client.CLIENT_NAME1);
-        login.loginToServer();
+        window.loginWith(Client.CLIENT_NAME1);
         assertFalse(window.getCurrentPage().isLoginPage());
     }
 
     @Test
     public void testLoginToServerWithInvalidName() {
-        login.setName("");
+        
         try {
-            login.loginToServer();
+            window.loginWith("");
             fail("should faild");
         } catch (Exception e) {
             String expected = LoginPage.INVALID_NAME_ERROR;
@@ -60,16 +59,10 @@ public class LoginPageTest {
 
     @Test
     public void testLoginWithDuplicateName() {
-        login.setName(Client.CLIENT_NAME1);
-        login.loginToServer();
-
-        ClientWindow anotherWindow = new ClientWindow();
-        anotherWindow.setServer(server);
-        LoginPage anotherLogin = (LoginPage) anotherWindow.getCurrentPage();
-        anotherLogin.setName(Client.CLIENT_NAME1);
-
+        window.loginWith(Client.CLIENT_NAME1);
+        ClientWindow anotherWindow = new ClientWindow(server);
         try {
-            anotherLogin.loginToServer();
+            anotherWindow.loginWith(Client.CLIENT_NAME1);
             fail("should fail");
         } catch (Exception e) {
             String expected = Server.DUPLICATED_NAME_ERROR;
@@ -79,10 +72,9 @@ public class LoginPageTest {
     
     @Test
     public void testLoginWhenServerIsDown() {
-        login.setName(Client.CLIENT_NAME1);
         window.setServer(null);
         try{
-            login.loginToServer();
+            window.loginWith(Client.CLIENT_NAME1);
             fail("should fail");
         }catch(Exception e){
             String expected = Server.NOT_FOUND;

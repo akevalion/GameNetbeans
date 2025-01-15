@@ -23,8 +23,11 @@ public class LobbyPageTest {
     public void setUp() {
         window = new ClientWindow();
         try {
-            server = new Server4Test();
+            Server4Test server = new Server4Test();
+            server.clearDatabase();
+            this.server = server;
             window.setServer(server);
+            
             LoginPage login = (LoginPage)window.getCurrentPage();
             login.setName(Client.CLIENT_NAME1);
             login.loginToServer();
@@ -63,6 +66,19 @@ public class LobbyPageTest {
 
     @Test
     public void testUpdateUsers() {
+        int result = lobby.getNumberOfUsers();
+        int expected = 1;
+        assertEquals(expected, result);
+    }
+    
+    @Test
+    public void testUpdate2Users(){
+        ClientWindow anotherWindow = new ClientWindow(server);
+        anotherWindow.loginWith(Client.CLIENT_NAME2);
+        
+        int result = lobby.getNumberOfUsers();
+        int expected = 2;
+        assertEquals(expected, result);
     }
     
 }

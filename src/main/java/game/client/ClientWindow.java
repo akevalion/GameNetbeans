@@ -28,6 +28,10 @@ public class ClientWindow extends JFrame {
         this.setSize();
         this.setPage(new LoginPage());
     }
+    public ClientWindow(Server server){
+        this();
+        this.setServer(server);
+    }
 
     private void setSize() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -59,6 +63,7 @@ public class ClientWindow extends JFrame {
             this.clean();
             newPage.install();
             currentPage = newPage;
+            this.revalidate();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -93,21 +98,6 @@ public class ClientWindow extends JFrame {
         }
     }
 
-    public void doLogin() throws Exception {
-        if (server == null) {
-            server = this.connectToServer();
-        }
-        if (client == null) {
-            throw new Exception("should not happen");
-        }
-        LobbyPage lobby = new LobbyPage();
-        client.usersDo((users) -> {
-            lobby.updateUsers(users);
-        });
-        server.add(client);
-        this.setPage(lobby);
-    }
-
     public void clean() {
         this.setContentPane(new JPanel());
         this.revalidate();
@@ -122,5 +112,11 @@ public class ClientWindow extends JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void loginWith(String name) {
+        LoginPage login = (LoginPage)this.getCurrentPage();
+        login.setName(name);
+        login.loginToServer();
     }
 }
