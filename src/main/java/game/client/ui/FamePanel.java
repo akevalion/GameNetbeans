@@ -1,6 +1,6 @@
 /*
  */
-package game.client;
+package game.client.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,10 +10,10 @@ import javax.swing.JPanel;
  *
  * @author milton
  */
-public class ChatLobbyPanel extends JPanel{
+public class FamePanel extends JPanel {
 
-    public ChatLobbyPanel() {
-        this.setBackground(Color.green);
+    public FamePanel() {
+        this.setBackground(Color.black);
         this.setPreferredSize(new Dimension(100,100));
     }
     

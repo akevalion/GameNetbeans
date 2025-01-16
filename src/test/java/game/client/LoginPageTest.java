@@ -2,6 +2,8 @@
  */
 package game.client;
 
+import game.client.ui.LoginPage;
+import game.client.ui.ClientWindow;
 import game.server.Server;
 import game.server.ServerImpl;
 import org.junit.Before;
@@ -47,7 +49,7 @@ public class LoginPageTest {
 
     @Test
     public void testLoginToServerWithInvalidName() {
-        
+
         try {
             window.loginWith("");
             fail("should faild");
@@ -69,17 +71,17 @@ public class LoginPageTest {
             assertEquals(expected, e.getMessage());
         }
     }
-    
+
     @Test
     public void testLoginWhenServerIsDown() {
         window.setServer(null);
-        try{
+        try {
             window.loginWith(Client.CLIENT_NAME1);
             fail("should fail");
-        }catch(Exception e){
+        } catch (Exception e) {
             String expected = Server.NOT_FOUND;
             assertEquals(expected, e.getMessage());
         }
     }
-    
+
 }

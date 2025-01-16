@@ -1,13 +1,11 @@
 /*
  */
-package game.client;
+package game.client.ui;
 
+import game.server.User;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -21,7 +19,7 @@ import javax.swing.border.TitledBorder;
  */
 public class ConnectedUsersPanel extends JPanel {
 
-    public static final String LIST_TITLE = "Usuarios Conectados";
+    public static final String LIST_TITLE = "Jugadores Conectados";
     private final DefaultListModel<String> usersListModel;
     private final JList<String> userList;
 
@@ -42,16 +40,13 @@ public class ConnectedUsersPanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void updateUsers(List<Client> users) {
+    public void updateUsers(List<User> users) {
         usersListModel.clear();
 
-        for (Client user : users) {
-            try {
-                usersListModel.addElement(user.getName());
-            } catch (RemoteException ex) {
-                ex.printStackTrace();
-            }
+        for (User user : users) {
+            usersListModel.addElement(user.getName());
         }
+
     }
 
     public int getNumberOfUsers() {

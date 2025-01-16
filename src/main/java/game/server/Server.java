@@ -20,7 +20,7 @@ public interface Server extends Remote {
 
     List<Client> getClients() throws RemoteException;
 
-    void add(Client client) throws RemoteException;
+    void register(Client client) throws RemoteException;
 
     void remove(Client client) throws RemoteException;
 

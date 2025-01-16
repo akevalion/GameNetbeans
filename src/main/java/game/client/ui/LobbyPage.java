@@ -1,7 +1,9 @@
 /*
  */
-package game.client;
+package game.client.ui;
 
+import game.client.Client;
+import game.server.User;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.*;
@@ -13,11 +15,12 @@ import javax.swing.*;
 public class LobbyPage extends Page {
 
     private UserPanel userPanel;
-    private ConnectedUsersPanel connectedUsersPanel;
+    private final ConnectedUsersPanel connectedUsersPanel;
     private GamesPanel gamesPanel;
     private ChatLobbyPanel chatPanel;
     private FamePanel hallOfFame;
-    public LobbyPage(){
+
+    public LobbyPage() {
         connectedUsersPanel = new ConnectedUsersPanel();
     }
 
@@ -26,7 +29,7 @@ public class LobbyPage extends Page {
         JPanel lobbyPanel = new JPanel();
         lobbyPanel.setLayout(new BorderLayout());
         userPanel = new UserPanel(window);
-        
+
         lobbyPanel.add(userPanel, BorderLayout.NORTH);
         lobbyPanel.add(connectedUsersPanel, BorderLayout.WEST);
         gamesPanel = new GamesPanel();
@@ -48,7 +51,7 @@ public class LobbyPage extends Page {
         return userPanel;
     }
 
-    public void updateUsers(List<Client> users) {
+    public void updateUsers(List<User> users) {
         connectedUsersPanel.updateUsers(users);
     }
 

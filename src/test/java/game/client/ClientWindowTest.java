@@ -2,6 +2,7 @@
  */
 package game.client;
 
+import game.client.ui.ClientWindow;
 import java.awt.Dimension;
 import org.junit.After;
 import org.junit.Before;

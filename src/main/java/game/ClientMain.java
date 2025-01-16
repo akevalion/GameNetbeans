@@ -2,7 +2,7 @@
  */
 package game;
 
-import game.client.ClientWindow;
+import game.client.ui.ClientWindow;
 import javax.swing.UIManager;
 
 /**

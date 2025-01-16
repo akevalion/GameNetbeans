@@ -7,7 +7,6 @@ import game.client.ClientImpl;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static game.client.Client.*;
-import org.junit.After;
 import org.junit.Before;
 
 /**
@@ -21,7 +20,6 @@ public class ServerTest {
     @Before
     public void setUp() throws Exception {
         Server4Test server2Test = new Server4Test();
-        server2Test.clearDatabase();
         server = server2Test;
     }
 
@@ -40,7 +38,7 @@ public class ServerTest {
     @Test
     public void testAddClient() throws Exception {
         Client client = new ClientImpl(CLIENT_NAME1);
-        server.add(client);
+        server.register(client);
         assertFalse(server.getClients().isEmpty());
         assertEquals(server.getClients().get(0), client);
     }
@@ -49,9 +47,9 @@ public class ServerTest {
     public void testClientAddDuplicatedClientNameThrowsAnError() throws Exception {
         Client client1 = new ClientImpl(CLIENT_NAME1);
         Client client2 = new ClientImpl(CLIENT_NAME1);
-        server.add(client1);
+        server.register(client1);
         try {
-            server.add(client2);
+            server.register(client2);
             fail("should fail");
         } catch (Exception ex) {
             String expected = Server.DUPLICATED_NAME_ERROR;
@@ -70,10 +68,10 @@ public class ServerTest {
         client2.usersDo((users) -> {
             update[0]++;
         });
-        server.add(client1);
+        server.register(client1);
         int expected = 1;
         assertEquals(expected, update[0]);
-        server.add(client2);
+        server.register(client2);
         expected = 3;
         assertEquals(expected, update[0]);
     }
@@ -81,7 +79,7 @@ public class ServerTest {
     @Test
     public void testRemoveClient() throws Exception {
         Client client = new ClientImpl(CLIENT_NAME1);
-        server.add(client);
+        server.register(client);
         server.remove(client);
         assertTrue(server.getClients().isEmpty());
     }
@@ -91,8 +89,8 @@ public class ServerTest {
         ClientImpl client1 = new ClientImpl(CLIENT_NAME1);
 
         Client client2 = new ClientImpl(CLIENT_NAME2);
-        server.add(client1);
-        server.add(client2);
+        server.register(client1);
+        server.register(client2);
         int[] result = {0};
         client1.usersDo((users) -> {
             result[0]++;
@@ -112,7 +110,7 @@ public class ServerTest {
     @Test
     public void testAddUserModifiesDB() throws Exception {
         Client client = new ClientImpl(CLIENT_NAME1);
-        server.add(client);
+        server.register(client);
         int result = server.numberOfUserInDB();
         int exptected = 1;
         assertEquals(exptected, result);

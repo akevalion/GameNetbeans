@@ -5,6 +5,7 @@ package game.client;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static game.client.Client.*;
+import game.server.User;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -24,15 +25,15 @@ public class ClientTest {
     @Test
     public void testUpdateList() throws Exception{
         ClientImpl client = new ClientImpl(CLIENT_NAME1);
-        List<Client> result = new ArrayList();
+        List<User> result = new ArrayList();
         client.usersDo((users)->{
             result.addAll(users);
         });
-        List<Client> expected = new ArrayList();
-        expected.add(new ClientImpl(CLIENT_NAME2));
-        expected.add(new ClientImpl(CLIENT_NAME3));
+        List<User> expected = new ArrayList();
+        expected.add(new User(CLIENT_NAME2));
+        expected.add(new User(CLIENT_NAME3));
         
-        client.updateClients(expected);
+        client.updateContectedUsers(expected);
         
         assertEquals(expected, result);
     }

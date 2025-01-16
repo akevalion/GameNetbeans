@@ -20,6 +20,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     protected EntityManager entityManager;
     private final UserRepository userRepository;
     private List<Client> clients;
+    private List<User> users;
 
     public ServerImpl() throws RemoteException {
         super();
@@ -35,6 +36,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(name);
         entityManager = emf.createEntityManager();
         clients = new ArrayList();
+        users = new ArrayList();
     }
 
     public List<String> getUserNames() throws RemoteException {
@@ -57,37 +59,47 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     }
 
     @Override
-    public synchronized void add(Client client) throws RemoteException {
-        if (this.hasClient(client)) {
+    public synchronized void register(Client client) throws RemoteException {
+        String name = client.getName();
+        if (this.hasClient(name)) {
             throw new RemoteException(DUPLICATED_NAME_ERROR);
         }
 
-        if (!userRepository.userExists(client.getName())) {
-            userRepository.addUser(new User(client.getName()));
+        if (!userRepository.userExists(name)) {
+            userRepository.addUser(new User(name));
         }
 
+        users.add(new User(name));
         clients.add(client);
         for (Client x : clients) {
-            x.updateClients(clients);
+            x.updateContectedUsers(users);
         }
+
     }
 
     @Override
     public synchronized void remove(Client client) throws RemoteException {
         clients.remove(client);
+        users.clear();
         for (Client x : clients) {
-            x.updateClients(clients);
+            users.add(new User(x.getName()));
+        }
+        for (Client x : clients) {
+            x.updateContectedUsers(users);
         }
     }
 
-    private boolean hasClient(Client client) throws RemoteException {
-        String name = client.getName();
-        for (Client x : clients) {
+    private boolean hasClient(String name) throws RemoteException {
+        return this.getUserFor(name) != null;
+    }
+
+    private User getUserFor(String name) throws RemoteException {
+        for (User x : users) {
             if (x.getName().equals(name)) {
-                return true;
+                return x;
             }
         }
-        return false;
+        return null;
     }
 
     @Override

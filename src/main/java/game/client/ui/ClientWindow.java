@@ -1,7 +1,8 @@
 /*
  */
-package game.client;
+package game.client.ui;
 
+import game.client.ClientImpl;
 import game.server.Server;
 import java.awt.Dimension;
 import java.awt.Toolkit;

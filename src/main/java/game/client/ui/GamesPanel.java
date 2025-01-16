@@ -1,6 +1,6 @@
 /*
  */
-package game.client;
+package game.client.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;

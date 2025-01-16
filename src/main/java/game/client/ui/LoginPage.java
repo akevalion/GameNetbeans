@@ -1,7 +1,8 @@
 /*
  */
-package game.client;
+package game.client.ui;
 
+import game.client.ClientImpl;
 import game.server.Server;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -144,7 +145,7 @@ public class LoginPage extends Page implements ActionListener {
         client.usersDo((users) -> {
             lobby.updateUsers(users);
         });
-        server.add(client);
+        server.register(client);
         window.setServer(server);
         window.setPage(lobby);
     }

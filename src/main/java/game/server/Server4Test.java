@@ -17,6 +17,7 @@ public class Server4Test extends ServerImpl {
 
     public Server4Test() throws RemoteException {
         super();
+        this.clearDatabase();
     }
 
     @Override
