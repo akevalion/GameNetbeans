@@ -1,6 +1,7 @@
 package game.server;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +17,9 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Message> messages;
+    
     public User() {
     }
 
@@ -40,6 +44,14 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+    
     @Override
     public String toString() {
         return "User{"

@@ -21,9 +21,9 @@ import static org.junit.Assert.*;
  */
 public class LobbyPageTest {
 
-    private Server server;
-    private ClientWindow window;
-    private LobbyPage lobby;
+    protected Server server;
+    protected ClientWindow window;
+    protected LobbyPage lobby;
 
     @Before
     public void setUp() {
@@ -97,4 +97,5 @@ public class LobbyPageTest {
         int expected = 1;
         assertEquals(expected, result);
     }
+    
 }

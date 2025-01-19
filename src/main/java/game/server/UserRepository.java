@@ -38,6 +38,17 @@ public class UserRepository {
         return count > 0;
     }
 
+    public User userNamed(String name) {
+        try {
+            return entityManager.createQuery(
+                    "SELECT u FROM User u WHERE u.name = :name", User.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public int size() {
         try {
             Long count = entityManager.createQuery("SELECT COUNT(u) FROM User u", Long.class)
@@ -48,4 +59,5 @@ public class UserRepository {
             throw new RuntimeException("Error al contar los usuarios en la base de datos", e);
         }
     }
+
 }

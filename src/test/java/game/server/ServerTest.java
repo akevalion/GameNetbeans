@@ -112,7 +112,24 @@ public class ServerTest {
         Client client = new ClientImpl(CLIENT_NAME1);
         server.register(client);
         int result = server.numberOfUserInDB();
-        int exptected = 1;
-        assertEquals(exptected, result);
+        int expected = 1;
+        assertEquals(expected, result);
+    }
+    
+    @Test
+    public void testNumberOfMessagesInDB() throws Exception{
+        int result = server.numberOfMesagesInDB();
+        int expected = 0;
+        assertEquals(expected, result);
+    }
+    
+    @Test
+    public void testSendMessageToAll() throws Exception {
+        Client client = new ClientImpl(CLIENT_NAME1);
+        server.register(client);
+        server.sendMessageToAll("hi", CLIENT_NAME1);
+        int result = server.numberOfMesagesInDB();
+        int expected = 1;
+        assertEquals(expected, result);
     }
 }

@@ -5,6 +5,7 @@
   <persistence-unit name="GamePU">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>game.server.User</class>
+    <class>game.server.Message</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:game.db"/>
@@ -17,6 +18,7 @@
   <persistence-unit name="GameTestPU">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>game.server.User</class>
+    <class>game.server.Message</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:test_game.db"/>

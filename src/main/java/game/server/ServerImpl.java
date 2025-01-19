@@ -19,6 +19,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 
     protected EntityManager entityManager;
     private final UserRepository userRepository;
+    private final MessageRepository messagesRepository;
     private List<Client> clients;
     private List<User> users;
 
@@ -26,6 +27,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         super();
         this.setUpDB();
         userRepository = new UserRepository(entityManager);
+        messagesRepository = new MessageRepository(entityManager);
     }
 
     public void setUpDB() {
@@ -37,15 +39,6 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
         entityManager = emf.createEntityManager();
         clients = new ArrayList();
         users = new ArrayList();
-    }
-
-    public List<String> getUserNames() throws RemoteException {
-        List<User> users = entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
-        List<String> names = new ArrayList();
-        for (User x : users) {
-            names.add(x.getName());
-        }
-        return names;
     }
 
     @Override
@@ -61,29 +54,36 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     @Override
     public synchronized void register(Client client) throws RemoteException {
         String name = client.getName();
+        
         if (this.hasClient(name)) {
             throw new RemoteException(DUPLICATED_NAME_ERROR);
         }
-
-        if (!userRepository.userExists(name)) {
-            userRepository.addUser(new User(name));
+        
+        User user = userRepository.userNamed(name);
+        if (user == null) {
+            user = new User(name);
+            userRepository.addUser(user);
         }
-
-        users.add(new User(name));
+        users.add(user);
         clients.add(client);
-        for (Client x : clients) {
-            x.updateContectedUsers(users);
-        }
-
+        clients.forEach((x)->{
+            try {
+                x.updateContectedUsers(users);
+            } catch (RemoteException ex) {}
+        });
     }
 
     @Override
     public synchronized void remove(Client client) throws RemoteException {
         clients.remove(client);
         users.clear();
-        for (Client x : clients) {
-            users.add(new User(x.getName()));
-        }
+        
+        clients.forEach((x) -> {
+            try {
+                users.add(new User(x.getName()));
+            } catch (RemoteException ex) {}
+        });
+        
         for (Client x : clients) {
             x.updateContectedUsers(users);
         }
@@ -103,8 +103,18 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     }
 
     @Override
-    public int numberOfUserInDB() throws RemoteException {
+    public synchronized int numberOfUserInDB() throws RemoteException {
         return userRepository.size();
     }
 
+    @Override
+    public synchronized void sendMessageToAll(String message, String username) throws RemoteException {
+        Message aMessage = new Message(message, this.getUserFor(username));
+        messagesRepository.addMessage(aMessage);
+    }
+
+    @Override
+    public int numberOfMesagesInDB() throws RemoteException {
+        return messagesRepository.numberOfMessages();
+    }
 }
