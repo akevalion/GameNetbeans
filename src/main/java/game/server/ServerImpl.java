@@ -2,7 +2,13 @@
  */
 package game.server;
 
+import game.server.dao.MessageRepository;
+import game.server.db.Message;
+import game.server.dao.UserRepository;
+import game.server.db.User;
 import game.client.Client;
+import game.server.dto.MessageDTO;
+import game.server.dto.UserDTO;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -21,7 +27,7 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     private final UserRepository userRepository;
     private final MessageRepository messagesRepository;
     private List<Client> clients;
-    private List<User> users;
+    private List<UserDTO> users;
 
     public ServerImpl() throws RemoteException {
         super();
@@ -54,22 +60,37 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     @Override
     public synchronized void register(Client client) throws RemoteException {
         String name = client.getName();
-        
+
         if (this.hasClient(name)) {
             throw new RemoteException(DUPLICATED_NAME_ERROR);
         }
-        
+
         User user = userRepository.userNamed(name);
         if (user == null) {
             user = new User(name);
             userRepository.addUser(user);
         }
-        users.add(user);
+        client.receiveMessage(new MessageDTO(this.welcomeMessage(name)));
+        users.add(user.asDTO());
         clients.add(client);
+        this.updateClients();
+        this.cast(new MessageDTO(this.hasConnectedMessage(name)));
+    }
+
+    private void cast(MessageDTO message){
         clients.forEach((x)->{
             try {
+                x.receiveMessage(message);
+            } catch (RemoteException e) {}
+        });
+    }
+    
+    private void updateClients() {
+        clients.forEach((x) -> {
+            try {
                 x.updateContectedUsers(users);
-            } catch (RemoteException ex) {}
+            } catch (RemoteException ex) {
+            }
         });
     }
 
@@ -77,25 +98,24 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
     public synchronized void remove(Client client) throws RemoteException {
         clients.remove(client);
         users.clear();
-        
+
         clients.forEach((x) -> {
             try {
-                users.add(new User(x.getName()));
-            } catch (RemoteException ex) {}
+                users.add(new UserDTO(x.getName()));
+            } catch (RemoteException ex) {
+            }
         });
-        
-        for (Client x : clients) {
-            x.updateContectedUsers(users);
-        }
+        this.updateClients();
+        this.cast(new MessageDTO(this.hasDisconnectedMessage(client.getName())));
     }
 
     private boolean hasClient(String name) throws RemoteException {
         return this.getUserFor(name) != null;
     }
 
-    private User getUserFor(String name) throws RemoteException {
-        for (User x : users) {
-            if (x.getName().equals(name)) {
+    private UserDTO getUserFor(String name) throws RemoteException {
+        for (UserDTO x : users) {
+            if (x.getUsername().equals(name)) {
                 return x;
             }
         }
@@ -109,12 +129,25 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 
     @Override
     public synchronized void sendMessageToAll(String message, String username) throws RemoteException {
-        Message aMessage = new Message(message, this.getUserFor(username));
+        Message aMessage = new Message(message, userRepository.userNamed(username));
         messagesRepository.addMessage(aMessage);
+        this.cast(aMessage.asDTO());
     }
 
     @Override
     public int numberOfMesagesInDB() throws RemoteException {
         return messagesRepository.numberOfMessages();
+    }
+
+    public String welcomeMessage(String name) {
+        return Message.WELCOME + name;
+    }
+
+    public String hasConnectedMessage(String name) {
+        return name + Message.HAS_CONNECTED;
+    }
+
+    public String hasDisconnectedMessage(String name) {
+        return name + Message.HAS_DISCONNECTED;
     }
 }

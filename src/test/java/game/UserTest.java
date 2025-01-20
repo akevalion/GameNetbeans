@@ -1,6 +1,6 @@
 package game;
 
-import game.server.User;
+import game.server.db.User;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

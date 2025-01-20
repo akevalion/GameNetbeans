@@ -1,5 +1,6 @@
-package game.server;
+package game.server.dao;
 
+import game.server.db.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;

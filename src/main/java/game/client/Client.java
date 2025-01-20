@@ -2,7 +2,8 @@
  */
 package game.client;
 
-import game.server.User;
+import game.server.dto.MessageDTO;
+import game.server.dto.UserDTO;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
@@ -19,5 +20,7 @@ public interface Client extends Remote {
 
     String getName() throws RemoteException;
 
-    void updateContectedUsers(List<User> users) throws RemoteException;
+    void updateContectedUsers(List<UserDTO> users) throws RemoteException;
+
+    void receiveMessage(MessageDTO messageDTO) throws RemoteException;
 }

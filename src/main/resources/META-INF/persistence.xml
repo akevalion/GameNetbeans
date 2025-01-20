@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence">
-  
   <!-- Unidad de persistencia para la base de datos principal -->
   <persistence-unit name="GamePU">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>game.server.User</class>
-    <class>game.server.Message</class>
+    <class>game.server.db.User</class>
+    <class>game.server.db.Message</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:game.db"/>
@@ -13,12 +12,11 @@
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
-
   <!-- Unidad de persistencia para la base de datos de prueba -->
   <persistence-unit name="GameTestPU">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>game.server.User</class>
-    <class>game.server.Message</class>
+    <class>game.server.db.User</class>
+    <class>game.server.db.Message</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:test_game.db"/>
@@ -26,6 +24,4 @@
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
-  
-
 </persistence>

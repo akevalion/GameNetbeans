@@ -2,7 +2,8 @@
  */
 package game.client;
 
-import game.server.User;
+import game.server.dto.MessageDTO;
+import game.server.dto.UserDTO;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
@@ -15,7 +16,8 @@ import java.util.function.Consumer;
 public class ClientImpl extends UnicastRemoteObject implements Client {
 
     private String name;
-    private Consumer usersDo;
+    private Consumer<List<UserDTO>> whenUsersDo;
+    private Consumer<MessageDTO> whenNewMessageDo;
 
     public ClientImpl(String name) throws RemoteException {
         this.name = name;
@@ -30,16 +32,29 @@ public class ClientImpl extends UnicastRemoteObject implements Client {
         return name;
     }
 
-    public void usersDo(Consumer<List<User>> con) throws RemoteException {
-        usersDo = con;
+    public void whenUpdateUsersDo(Consumer<List<UserDTO>> con) {
+        whenUsersDo = con;
     }
 
     @Override
-    public void updateContectedUsers(List<User> users) throws RemoteException {
-        if (usersDo == null) {
+    public void updateContectedUsers(List<UserDTO> users) throws RemoteException {
+        if (whenUsersDo == null) {
             return;
         }
-        usersDo.accept(users);
+
+        whenUsersDo.accept(users);
+    }
+
+    public void whenNewMessageDo(Consumer<MessageDTO> con) {
+        whenNewMessageDo = con;
+    }
+
+    @Override
+    public void receiveMessage(MessageDTO messageDTO) throws RemoteException{
+        if (whenNewMessageDo == null) {
+            return;
+        }
+        whenNewMessageDo.accept(messageDTO);
     }
 
 }

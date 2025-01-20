@@ -2,7 +2,7 @@
  */
 package game.client.ui;
 
-import game.server.User;
+import game.server.dto.UserDTO;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
@@ -40,11 +40,11 @@ public class ConnectedUsersPanel extends JPanel {
         this.add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void updateUsers(List<User> users) {
+    public void updateUsers(List<UserDTO> users) {
         usersListModel.clear();
 
-        for (User user : users) {
-            usersListModel.addElement(user.getName());
+        for (UserDTO user : users) {
+            usersListModel.addElement(user.getUsername());
         }
 
     }

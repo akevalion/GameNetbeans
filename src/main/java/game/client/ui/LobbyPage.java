@@ -2,7 +2,7 @@
  */
 package game.client.ui;
 
-import game.server.User;
+import game.server.dto.UserDTO;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.*;
@@ -50,7 +50,7 @@ public class LobbyPage extends Page {
         return userPanel;
     }
 
-    public void updateUsers(List<User> users) {
+    public void updateUsers(List<UserDTO> users) {
         connectedUsersPanel.updateUsers(users);
     }
 

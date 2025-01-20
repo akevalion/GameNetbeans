@@ -29,4 +29,5 @@ public interface Server extends Remote {
     void sendMessageToAll(String message, String username) throws RemoteException;
 
     int numberOfMesagesInDB() throws RemoteException;
+
 }

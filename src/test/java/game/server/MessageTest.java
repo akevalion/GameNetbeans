@@ -2,6 +2,8 @@
  */
 package game.server;
 
+import game.server.db.Message;
+import game.server.db.User;
 import game.client.Client;
 import java.util.Date;
 import org.junit.Test;

@@ -1,5 +1,6 @@
-package game.server;
+package game.server.db;
 
+import game.server.dto.UserDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
@@ -58,5 +59,9 @@ public class User implements Serializable {
                 + "id=" + id
                 + ", name='" + name + '\''
                 + '}';
+    }
+
+    public UserDTO asDTO() {
+        return new UserDTO(name);
     }
 }

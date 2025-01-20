@@ -1,9 +1,9 @@
 /*
  */
-package game.server;
+package game.server.db;
 
+import game.server.dto.MessageDTO;
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,9 +12,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "messages")
-public class Message implements Serializable {
+public class Message {
 
-    private static final long serialVersionUID = 1L;
+    public static final String HI = "hola!";
+    public static final String WELCOME = "Bienvenido ";
+    public static final String HAS_CONNECTED = " se ha conectado.";
+    public static final String HAS_DISCONNECTED= " se ha desconectado.";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,5 +84,13 @@ public class Message implements Serializable {
                 ", message='" + message + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    public MessageDTO asDTO() {
+        MessageDTO dto = new MessageDTO();
+        dto.setCreatedAt(createdAt);
+        dto.setUsername(user.getName());
+        dto.setMessage(message);
+        return dto;
     }
 }
