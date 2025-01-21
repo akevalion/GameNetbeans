@@ -38,6 +38,7 @@ public class LobbyPageTest {
             login.loginToServer();
             lobby = (LobbyPage) window.getCurrentPage();
         } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

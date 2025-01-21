@@ -142,9 +142,8 @@ public class LoginPage extends Page implements ActionListener {
             throw new Exception("should not happen");
         }
         LobbyPage lobby = new LobbyPage();
-        client.whenUpdateUsersDo((users) -> {
-            lobby.updateUsers(users);
-        });
+        client.whenUpdateUsersDo(lobby::updateUsers);
+        client.whenNewMessageDo(lobby::receiveMessage);
         server.register(client);
         window.setServer(server);
         window.setPage(lobby);

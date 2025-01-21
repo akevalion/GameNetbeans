@@ -2,6 +2,7 @@
  */
 package game.client.ui;
 
+import game.server.dto.MessageDTO;
 import game.server.dto.UserDTO;
 import java.awt.BorderLayout;
 import java.util.List;
@@ -21,6 +22,7 @@ public class LobbyPage extends Page {
 
     public LobbyPage() {
         connectedUsersPanel = new ConnectedUsersPanel();
+        chatPanel = new ChatLobbyPanel();
     }
 
     @Override
@@ -33,7 +35,7 @@ public class LobbyPage extends Page {
         lobbyPanel.add(connectedUsersPanel, BorderLayout.WEST);
         gamesPanel = new GamesPanel();
         lobbyPanel.add(gamesPanel, BorderLayout.CENTER);
-        chatPanel = new ChatLobbyPanel(window.getServer(), window.getClientImpl().getName());
+        chatPanel.initializeWith(window.getServer(), window.getClientImpl().getName());
         lobbyPanel.add(chatPanel, BorderLayout.SOUTH);
         hallOfFame = new FamePanel();
         lobbyPanel.add(hallOfFame, BorderLayout.EAST);
@@ -60,6 +62,10 @@ public class LobbyPage extends Page {
 
     public ChatLobbyPanel getChatPanel() {
         return chatPanel;
+    }
+
+    public void receiveMessage(MessageDTO message) {
+        chatPanel.receiveMessage(message);
     }
 
 }
