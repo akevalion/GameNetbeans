@@ -147,7 +147,7 @@ public class ServerTest {
         List<MessageDTO> list1 = new ArrayList();
         List<MessageDTO> list2 = new ArrayList();
         client1.whenNewMessageDo(list1::add);
-        client1.whenNewMessageDo(list2::add);
+        client2.whenNewMessageDo(list2::add);
         assertTrue(list1.isEmpty());
         assertTrue(list2.isEmpty());
         assertEquals(list1, list2);
@@ -161,7 +161,7 @@ public class ServerTest {
         ClientImpl client1 = new ClientImpl(CLIENT_NAME1);
         ClientImpl client2 = new ClientImpl(CLIENT_NAME2);
         client1.whenNewMessageDo(list1::add);
-        client1.whenNewMessageDo(list2::add);
+        client2.whenNewMessageDo(list2::add);
         server.register(client1);
         server.register(client2);
     }
@@ -224,7 +224,6 @@ public class ServerTest {
         String result = list2.get(list2.size()-1).getMessage();
         assertEquals(expected, result);
     }
-    
     
     @Test
     public void testLoginAnnouncesDoesNotCreateMessagesInDB() throws Exception{

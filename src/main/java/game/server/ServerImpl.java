@@ -70,11 +70,12 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
             user = new User(name);
             userRepository.addUser(user);
         }
-        client.receiveMessage(new MessageDTO(this.welcomeMessage(name)));
+        
+        this.cast(new MessageDTO(this.hasConnectedMessage(name)));
         users.add(user.asDTO());
+        client.receiveMessage(new MessageDTO(this.welcomeMessage(name)));
         clients.add(client);
         this.updateClients();
-        this.cast(new MessageDTO(this.hasConnectedMessage(name)));
     }
 
     private void cast(MessageDTO message){
