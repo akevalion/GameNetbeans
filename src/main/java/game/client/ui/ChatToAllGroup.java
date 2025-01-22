@@ -10,8 +10,8 @@ import game.server.Server;
  */
 public class ChatToAllGroup extends ChatGroup {
 
-    public ChatToAllGroup(Server server, String username) {
-        super(server, username);
+    public ChatToAllGroup(String username) {
+        this.setUsername(username);
     }
 
     @Override

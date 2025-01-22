@@ -25,13 +25,12 @@ public class ChatLobbyPanel extends JPanel implements KeyListener {
     
     public static final String YOU = "tu: ";
     private ChatGroup chatGroup;
-    private List<MessageDTO> messages;
     private JTextPane textPane;
     private String username;
     
     public ChatLobbyPanel(String username) {
-        messages = new ArrayList();
         this.username = username;
+        chatGroup = new ChatToAllGroup(username);
         this.initializeComponents();
     }
     
@@ -50,11 +49,11 @@ public class ChatLobbyPanel extends JPanel implements KeyListener {
     }
     
     public void initializeWith(Server server) {
-        chatGroup = new ChatToAllGroup(server, username);
+        chatGroup.setServer(server);
     }
     
     public int getNumberOfMessages() {
-        return messages.size();
+        return this.getMessages().size();
     }
     
     public ChatGroup receiverGroup() {
@@ -70,30 +69,16 @@ public class ChatLobbyPanel extends JPanel implements KeyListener {
     }
     
     public void receiveMessage(MessageDTO message) {
-        messages.add(message);
+        chatGroup.addMessage(message);
         this.updateText();
     }
     
     public void updateText() {
-        StringBuilder builder = new StringBuilder();
-        for (MessageDTO message : messages) {
-            boolean flag = false;
-            if (message.getUsername() != null && message.getUsername().equals(username)) {
-                message.setUsername("tu");
-                flag = true;
-            }
-            builder.append(message.toString());
-            if (flag) {
-                message.setUsername(username);
-            }
-            builder.append("\n");
-        }
-        builder.append(YOU);
-        SwingUtilities.invokeLater(() -> textPane.setText(builder.toString()));
+        SwingUtilities.invokeLater(() -> chatGroup.updateText(textPane));
     }
     
     public List<MessageDTO> getMessages() {
-        return messages;
+        return chatGroup.getMessages();
     }
     
     @Override
