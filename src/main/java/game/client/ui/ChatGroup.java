@@ -31,4 +31,12 @@ public abstract class ChatGroup {
     public boolean isToOneUser() {
         return false;
     }
+
+    public Server getServer() {
+        return server;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }

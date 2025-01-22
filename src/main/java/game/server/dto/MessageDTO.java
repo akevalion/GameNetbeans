@@ -73,4 +73,16 @@ public class MessageDTO implements Serializable {
         this.username = username;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        if(username != null){
+            builder.append(username);
+            builder.append(": ");
+        }
+        builder.append(message);
+        return builder.toString();
+    }
+
+    
 }

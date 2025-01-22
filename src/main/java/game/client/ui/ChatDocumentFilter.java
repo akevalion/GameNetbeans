@@ -23,6 +23,8 @@ public class ChatDocumentFilter extends DocumentFilter {
     
     @Override
     public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException{
+        System.out.print("replace");
+
         int lastEditablePosition = this.getLastEditablePosition();
         if(offset >= lastEditablePosition)
             super.replace(fb, offset, length, text, attrs);
@@ -30,14 +32,21 @@ public class ChatDocumentFilter extends DocumentFilter {
     
     @Override
     public void insertString(FilterBypass fb, int offset, String text, AttributeSet attrs) throws BadLocationException{
-        int lastEditablePosition = this.getLastEditablePosition();
-        if(offset >= lastEditablePosition)
+        
+        System.out.print("insertString");
             super.insertString(fb, offset, text, attrs);
     }
     
     @Override
     public void remove(FilterBypass fb, int offset, int length) throws BadLocationException{
-        int lastEditablePosition = this.getLastEditablePosition();
+        System.out.print("remove");
+        if(textPane.getText().length() == length && offset == 0){
+            super.remove(fb, offset, length);
+            return;
+        }
+        
+        int lastEditablePosition = this.getLastEditablePosition()+ChatLobbyPanel.YOU.length();
+        
         if(offset >= lastEditablePosition)
             super.remove(fb, offset, length);
     }

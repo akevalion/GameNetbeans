@@ -20,9 +20,9 @@ public class LobbyPage extends Page {
     private ChatLobbyPanel chatPanel;
     private FamePanel hallOfFame;
 
-    public LobbyPage() {
+    public LobbyPage(String username) {
         connectedUsersPanel = new ConnectedUsersPanel();
-        chatPanel = new ChatLobbyPanel();
+        chatPanel = new ChatLobbyPanel(username);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class LobbyPage extends Page {
         lobbyPanel.add(connectedUsersPanel, BorderLayout.WEST);
         gamesPanel = new GamesPanel();
         lobbyPanel.add(gamesPanel, BorderLayout.CENTER);
-        chatPanel.initializeWith(window.getServer(), window.getClientImpl().getName());
+        chatPanel.initializeWith(window.getServer());
         lobbyPanel.add(chatPanel, BorderLayout.SOUTH);
         hallOfFame = new FamePanel();
         lobbyPanel.add(hallOfFame, BorderLayout.EAST);
