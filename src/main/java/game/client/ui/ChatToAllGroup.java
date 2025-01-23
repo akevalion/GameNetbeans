@@ -2,8 +2,6 @@
  */
 package game.client.ui;
 
-import game.server.Server;
-
 /**
  *
  * @author milton

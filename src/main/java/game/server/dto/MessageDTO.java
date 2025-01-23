@@ -9,6 +9,7 @@ package game.server.dto;
  * @author pi
  */
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MessageDTO implements Serializable {
@@ -18,17 +19,18 @@ public class MessageDTO implements Serializable {
     private Date createdAt;
     private String username;
 
-    public MessageDTO(){
+    public MessageDTO() {
         createdAt = new Date();
     }
-    
-    public MessageDTO(String message){
+
+    public MessageDTO(String message) {
         this(message, null);
     }
-    
+
     public MessageDTO(String message, String username) {
         this.message = message;
         this.username = username;
+        this.createdAt = new Date();
     }
 
     /**
@@ -76,7 +78,7 @@ public class MessageDTO implements Serializable {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        if(username != null){
+        if (username != null) {
             builder.append(username);
             builder.append(": ");
         }
@@ -84,5 +86,13 @@ public class MessageDTO implements Serializable {
         return builder.toString();
     }
 
-    
+    public String getCreatedAtAsString() {
+        SimpleDateFormat formatter = new SimpleDateFormat("[hh:mm a]");
+        return formatter.format(createdAt);
+    }
+
+    public boolean isSystemMessage() {
+        return username == null;
+    }
+
 }

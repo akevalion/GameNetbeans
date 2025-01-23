@@ -20,35 +20,38 @@ public class ChatDocumentFilter extends DocumentFilter {
     public ChatDocumentFilter(JTextPane textPane) {
         this.textPane = textPane;
     }
-    
+
     @Override
-    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException{
+    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
         System.out.print("replace");
 
         int lastEditablePosition = this.getLastEditablePosition();
-        if(offset >= lastEditablePosition)
+        if (offset >= lastEditablePosition) {
             super.replace(fb, offset, length, text, attrs);
+        }
     }
-    
+
     @Override
-    public void insertString(FilterBypass fb, int offset, String text, AttributeSet attrs) throws BadLocationException{
-        
+    public void insertString(FilterBypass fb, int offset, String text, AttributeSet attrs) throws BadLocationException {
+
         System.out.print("insertString");
-            super.insertString(fb, offset, text, attrs);
+        super.insertString(fb, offset, text, attrs);
     }
-    
+
     @Override
-    public void remove(FilterBypass fb, int offset, int length) throws BadLocationException{
+    public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
+        
         System.out.print("remove");
-        if(textPane.getText().length() == length && offset == 0){
+        if (offset == 0) {
             super.remove(fb, offset, length);
             return;
         }
-        
-        int lastEditablePosition = this.getLastEditablePosition()+ChatLobbyPanel.YOU.length();
-        
-        if(offset >= lastEditablePosition)
+
+        int lastEditablePosition = this.getLastEditablePosition() + ChatLobbyPanel.YOU.length();
+
+        if (offset >= lastEditablePosition) {
             super.remove(fb, offset, length);
+        }
     }
 
     private int getLastEditablePosition() {
@@ -56,5 +59,5 @@ public class ChatDocumentFilter extends DocumentFilter {
         int lastNewLineIndex = text.lastIndexOf("\n");
         return lastNewLineIndex + 1;
     }
-    
+
 }

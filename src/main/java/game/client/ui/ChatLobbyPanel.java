@@ -9,7 +9,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -24,6 +23,7 @@ import javax.swing.text.AbstractDocument;
 public class ChatLobbyPanel extends JPanel implements KeyListener {
     
     public static final String YOU = "tu: ";
+    public static final String ONLY_YOU = "tu";
     private ChatGroup chatGroup;
     private JTextPane textPane;
     private String username;
@@ -74,7 +74,8 @@ public class ChatLobbyPanel extends JPanel implements KeyListener {
     }
     
     public void updateText() {
-        SwingUtilities.invokeLater(() -> chatGroup.updateText(textPane));
+        chatGroup.updateText(textPane);
+        //SwingUtilities.invokeLater(() -> );
     }
     
     public List<MessageDTO> getMessages() {
