@@ -130,7 +130,8 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 
     @Override
     public synchronized void sendMessageToAll(String message, String username) throws RemoteException {
-        Message aMessage = new Message(message, userRepository.userNamed(username));
+        User user = userRepository.userNamed(username);
+        Message aMessage = new Message(message, user, this.newDate()) ;
         messagesRepository.addMessage(aMessage);
         this.cast(aMessage.asDTO());
     }

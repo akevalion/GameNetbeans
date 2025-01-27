@@ -34,15 +34,17 @@ public class Message {
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
-    public Message() {
-        this.createdAt = new Date();
-    }
+    public Message() {}
 
     public Message(String message, User user) {
-        this();
+        this(message, user, new Date());
         this.message = message;
         this.user = user;
     }
+    
+    public Message(String message, User user, Date date){
+    }
+    
 
     // Getters y Setters
     public Long getId() {
