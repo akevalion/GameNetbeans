@@ -12,6 +12,7 @@ import game.server.dto.UserDTO;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -151,5 +152,9 @@ public class ServerImpl extends UnicastRemoteObject implements Server {
 
     public String hasDisconnectedMessage(String name) {
         return name + Message.HAS_DISCONNECTED;
+    }
+
+    private Date newDate() {
+        return new Date();
     }
 }

@@ -29,7 +29,7 @@ public class LobbyPageTest {
     public void setUp() {
         window = new ClientWindow();
         try {
-            Server4Test server = new Server4Test();
+            Server4Test server = new Server4Test(dateForTest);
             this.server = server;
             window.setServer(server);
 

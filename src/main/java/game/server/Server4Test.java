@@ -3,6 +3,7 @@
 package game.server;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityTransaction;
@@ -15,8 +16,15 @@ import javax.persistence.metamodel.Metamodel;
  */
 public class Server4Test extends ServerImpl {
 
-    public Server4Test() throws RemoteException {
+    private Date dateForTest;
+    
+    public Server4Test() throws RemoteException{
+        this(new Date());
+    }
+            
+    public Server4Test(Date dateForTest) throws RemoteException {
         super();
+        this.dateForTest = dateForTest;
         this.clearDatabase();
     }
 
@@ -46,5 +54,8 @@ public class Server4Test extends ServerImpl {
         return metamodel.getEntities().stream()
                 .map(EntityType::getJavaType)
                 .collect(Collectors.toList());
+    }
+    private Date newDate(){
+        return dateForTest;
     }
 }

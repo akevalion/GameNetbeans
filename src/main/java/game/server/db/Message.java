@@ -38,13 +38,13 @@ public class Message {
 
     public Message(String message, User user) {
         this(message, user, new Date());
+    }
+    
+    public Message(String message, User user, Date createdAt){
         this.message = message;
         this.user = user;
+        this.createdAt = createdAt;
     }
-    
-    public Message(String message, User user, Date date){
-    }
-    
 
     // Getters y Setters
     public Long getId() {
